@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.capstone.bankadmin.model.Customer;
 import com.capstone.bankadmin.service.CustomerService;
 
-import antlr.collections.List;
+import java.util.List;
 
 @RestController
 public class CustomerController {
