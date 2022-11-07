@@ -1,10 +1,13 @@
 package com.capstone.bankadmin.model;
 
-import java.util.Date;
+import java.sql.Date;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -37,10 +40,13 @@ public class Customer {
 	@Column(name="customer_date_of_birth")
 	private Date customerDateOfBirth;
 	
+	@OneToMany(mappedBy="customer", cascade = CascadeType.ALL)
+	private Set<Account> accounts;
+	
 	public Customer() {}
 	
 	public Customer(int customerNumber, String firstName, String middleName, String lastName,
-			String customerCity, String customerContactNo, String occupation, Date customerDateOfBirth ) {
+			String customerCity, String customerContactNo, String occupation, Date customerDateOfBirth) {
 		super();
 		this.customerNumber = customerNumber;
 		this.firstName = firstName;
@@ -117,7 +123,21 @@ public class Customer {
 		this.customerDateOfBirth = customerDateOfBirth;
 	}
 	
-	
+	public Set<Account> getAccounts() {
+		return accounts;
+	}
+
+	public void setAccounts(Set<Account> accounts) {
+		this.accounts = accounts;
+	}
+
+	@Override
+	public String toString() {
+		return "Customer [customerNumber=" + customerNumber + ", firstName=" + firstName + ", middleName=" + middleName
+				+ ", lastName=" + lastName + ", customerCity=" + customerCity + ", customerContactNo="
+				+ customerContactNo + ", occupation=" + occupation + ", customerDateOfBirth=" + customerDateOfBirth
+				+ ", accounts=" + accounts + "]";
+	}
 	
 	
 }

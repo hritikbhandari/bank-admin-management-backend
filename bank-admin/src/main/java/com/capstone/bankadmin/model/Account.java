@@ -1,8 +1,11 @@
 package com.capstone.bankadmin.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -13,8 +16,9 @@ public class Account {
 	@Column(name="account_number")
 	private int accountNumber;
 	
-	@Column(name="customer_number")
-	private int customerNumber;
+	@ManyToOne
+	@JoinColumn(name="customer_number", nullable=false)
+	private Customer customer;
 	
 	@Column(name="branch_id")
 	private String branchId;
@@ -30,11 +34,10 @@ public class Account {
 	
 	public Account () {	}
 	
-	public Account(int accountNumber, int customerNumber, String branchId,
+	public Account(int accountNumber, String branchId,
 			int openingBalance, String accountType, String accountStatus ) {
 		super();
 		this.accountNumber = accountNumber;
-		this.customerNumber = customerNumber;
 		this.branchId = branchId;
 		this.openingBalance = openingBalance;
 		this.accountType = accountType;
@@ -47,14 +50,6 @@ public class Account {
 
 	public void setAccountNumber(int accountNumber) {
 		this.accountNumber = accountNumber;
-	}
-
-	public int getCustomerNumber() {
-		return customerNumber;
-	}
-
-	public void setCustomerNumber(int customerNumber) {
-		this.customerNumber = customerNumber;
 	}
 
 	public String getBranchId() {
@@ -87,6 +82,13 @@ public class Account {
 
 	public void setAccountStatus(String accountStatus) {
 		this.accountStatus = accountStatus;
+	}
+
+	@Override
+	public String toString() {
+		return "Account [accountNumber=" + accountNumber + ", customer=" + customer + ", branchId=" + branchId
+				+ ", openingBalance=" + openingBalance + ", accountType=" + accountType + ", accountStatus="
+				+ accountStatus + "]";
 	}
 	
 	
