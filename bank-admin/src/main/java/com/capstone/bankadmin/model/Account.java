@@ -17,7 +17,7 @@ public class Account {
 	private int accountNumber;
 	
 	@ManyToOne
-	@JoinColumn(name="customer_number", nullable=false)
+	@JoinColumn(name="customer_number")
 	private Customer customer;
 	
 	@Column(name="branch_id")
@@ -82,6 +82,14 @@ public class Account {
 
 	public void setAccountStatus(String accountStatus) {
 		this.accountStatus = accountStatus;
+	}
+
+	public Customer getCustomer() {
+		return customer;
+	}
+
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
 	}
 
 	@Override

@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "customer_master")
 
@@ -40,6 +42,7 @@ public class Customer {
 	@Column(name="customer_date_of_birth")
 	private Date customerDateOfBirth;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy="customer", cascade = CascadeType.ALL)
 	private Set<Account> accounts;
 	

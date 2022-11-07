@@ -26,9 +26,9 @@ public class AccountController {
 	@Autowired
 	private AccountService accountService;
 	
-	@PostMapping("/")
-	public ResponseEntity<Boolean> createAccount(@RequestBody Account account) throws IllegalArgumentException {
-		boolean created = accountService.createAccount(account);
+	@PostMapping("/{id}")
+	public ResponseEntity<Boolean> createAccount(@PathVariable int id, @RequestBody Account account) throws IllegalArgumentException {
+		boolean created = accountService.createAccount(id, account);
 		if(created)
 			return new ResponseEntity<>(true, HttpStatus.CREATED);
 		else

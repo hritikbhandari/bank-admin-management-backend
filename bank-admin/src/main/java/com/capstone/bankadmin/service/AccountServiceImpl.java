@@ -7,7 +7,9 @@ import org.springframework.stereotype.Service;
 
 import com.capstone.bankadmin.exception.NotFoundException;
 import com.capstone.bankadmin.model.Account;
+import com.capstone.bankadmin.model.Customer;
 import com.capstone.bankadmin.repository.AccountRepository;
+import com.capstone.bankadmin.repository.CustomerRepository;
 
 
 @Service
@@ -15,13 +17,19 @@ public class AccountServiceImpl implements AccountService{
 	
 	@Autowired
 	private AccountRepository repo;
+	
+	@Autowired
+	private CustomerRepository customerRepo;
 
 	@Override
-	public boolean createAccount(Account account) throws IllegalArgumentException {
+	public boolean createAccount(int id, Account account) throws NotFoundException, IllegalArgumentException {
+		Customer c = customerRepo.findById(id).orElseThrow(() -> new NotFoundException("Customer not found!"));
+		
 		if(account != null && (account.getAccountNumber() == 0 || account.getAccountStatus() == null || account.getAccountType() == null || account.getBranchId() == null))
 			throw new IllegalArgumentException("Account details should not be Null");
 		if(account.getAccountStatus() == "" || account.getAccountType() == "" || account.getBranchId() == "")
 			throw new IllegalArgumentException("Account details should not be Empty");
+		account.setCustomer(c);
 		Account savedAccount= repo.save(account);
 		if(savedAccount != null)
 			return true;
