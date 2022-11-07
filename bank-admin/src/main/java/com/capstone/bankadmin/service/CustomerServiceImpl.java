@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.capstone.bankadmin.model.Customer;
 import com.capstone.bankadmin.repository.CustomerRepository;
 
 

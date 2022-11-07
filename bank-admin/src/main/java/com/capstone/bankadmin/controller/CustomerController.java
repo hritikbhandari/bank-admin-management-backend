@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.capstone.bankadmin.model.Customer;
 import com.capstone.bankadmin.service.CustomerService;
 
 import antlr.collections.List;
