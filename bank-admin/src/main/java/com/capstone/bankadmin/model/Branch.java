@@ -14,7 +14,6 @@ public class Branch {
 	private int branchId;
 	
 	@Column(name="branch_name")
-	
 	private String branchName;
 	
 	@Column(name="branch_city")
