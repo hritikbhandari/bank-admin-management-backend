@@ -1,12 +1,15 @@
 package com.capstone.bankadmin.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.capstone.bankadmin.exception.NotFoundException;
 import com.capstone.bankadmin.model.Customer;
 import com.capstone.bankadmin.service.CustomerService;
 
@@ -17,16 +20,18 @@ import java.util.List;
 public class CustomerController {
 
 	@Autowired
-	CustomerService service;
+	CustomerService customerService;
 	@GetMapping("/")
-	public List<Customer> showAllData(){
-		return service.getAllData();
+	public ResponseEntity<List<Customer>> showAllData(){
+		 List<Customer>customerDetails=customerService.getAllData();
+		 return new ResponseEntity<>(customerDetails,HttpStatus.OK);
 	}
 
 	@DeleteMapping("/delete/{id}")
-	public String deletePost(@PathVariable("id")int id){
-		service.deleteCustomer(id);
+	public ResponseEntity<String> deleteCustomer(@PathVariable int id) throws NotFoundException{
+		String response=(String) customerService.deleteCustomer(id);
 		
-		return "data deleted successfully..";
+		
+		return new ResponseEntity<>(response,HttpStatus.OK);
 	}
 }
