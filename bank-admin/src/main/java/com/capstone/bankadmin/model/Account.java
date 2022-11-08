@@ -1,5 +1,7 @@
 package com.capstone.bankadmin.model;
 
+import java.sql.Date;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -32,16 +34,20 @@ public class Account {
 	@Column(name="account_status")
 	private String accountStatus;
 	
+	@Column(name="account_opening_date")
+	private Date accountOpeningDate;
+	
 	public Account () {	}
 	
 	public Account(int accountNumber, String branchId,
-			int openingBalance, String accountType, String accountStatus ) {
+			int openingBalance, String accountType, String accountStatus, Date accountOpeningDate ) {
 		super();
 		this.accountNumber = accountNumber;
 		this.branchId = branchId;
 		this.openingBalance = openingBalance;
 		this.accountType = accountType;
 		this.accountStatus = accountStatus;
+		this.accountOpeningDate = accountOpeningDate;
 	}
 
 	public int getAccountNumber() {
@@ -90,6 +96,14 @@ public class Account {
 
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
+	}
+	
+	public Date getAccountOpeningDate() {
+		return accountOpeningDate;
+	}
+
+	public void setAccountOpeningDate(Date accountOpeningDate) {
+		this.accountOpeningDate = accountOpeningDate;
 	}
 
 	@Override
