@@ -44,9 +44,6 @@ class BranchServiceImplTest {
 		assertFalse(result);
 	}
 	
-	
-	
-	
 	private Branch getBranchDetails() {
 		return new Branch(2, "TestBranch", "TestCity");
 	}
